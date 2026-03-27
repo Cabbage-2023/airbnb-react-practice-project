@@ -4,11 +4,14 @@ import PropTypes from 'prop-types'
 import RateStar from '@/components/rate-star'
 
 const RoomItem = memo((props) => {
-  const {itemData}=props
+  const {itemData,itemWidth="25%"}=props
 
   return (
     //加$是为了在style.js里使用verifyColor，不然HTML会觉得这是自己的属性
-    <ItemWrapper $verifyColor={itemData?.verify_info?.text_color||'#39C5BB'}>
+    <ItemWrapper 
+      $verifyColor={itemData?.verify_info?.text_color||'#39C5BB'}
+      $itemWidth={itemWidth}
+    >
       <div className="inner">
         <div className="cover">
           <img src={itemData.picture_url} alt=''/>
