@@ -5,3 +5,9 @@ export function getHomeGoodPriceData(params) {
     url:'/home/goodprice',
   })
 } 
+
+export function getHomeHighScoreData(){
+  return hyRequest.get({
+    url:'/home/highscore'
+  })
+}

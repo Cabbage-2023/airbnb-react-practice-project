@@ -4,7 +4,7 @@ export const HeaderWrapper = styled.div`
   .title{
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin:32px 0 16px 0;
   }
 
   .subtitle{
