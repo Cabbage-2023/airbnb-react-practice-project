@@ -15,10 +15,6 @@ export const ViewWrapper = styled.div`
 
     & > * {
       flex-shrink: 0; /* 防止被挤压 */
-      ${props => props.theme.mixin.boxShadow}
-      /* 记得加点间距，否则阴影会重叠在一起看不清 */
-      margin: 4px 8px; 
-      background-color: #fff;
       border-radius: 3px;
     }
   }
