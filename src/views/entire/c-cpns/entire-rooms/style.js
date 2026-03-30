@@ -5,7 +5,8 @@ import { ItemWrapper } from '@/components/room-item/style'
 export const RoomsWrapper = styled.div`
   padding: 30px 20px;
   position: relative;
-
+  margin-top: 128px;
+  
   .title {
     font-size: 22px;
     font-weight: 700;
