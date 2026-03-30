@@ -1,5 +1,8 @@
-import React, { memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import { shallowEqual } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { changeDetailInfo } from '@/store/modules/detail'
 
 import { RoomsWrapper } from './style'
 import { useSelector } from 'react-redux'
@@ -13,7 +16,13 @@ const EntireRooms = memo(() => {
     isLoading:state.entire.isLoading
   }),shallowEqual)
 
-
+  // 点击房间项跳转详情页
+  const navigate = useNavigate()
+  const dispatch=useDispatch()
+  const itemClickHandle =useCallback((itemData)=>{
+    dispatch(changeDetailInfo(itemData))
+    navigate("/detail")
+  },[navigate,dispatch])
 
   return (
     <RoomsWrapper>
@@ -21,7 +30,14 @@ const EntireRooms = memo(() => {
       <div className="list">
         {
           roomList?.map(item=>{
-            return <RoomItem itemData={item} itemWidth="20%" key={item._id}/>
+            return (
+              <RoomItem 
+                itemData={item} 
+                itemWidth="20%" 
+                key={item._id}
+                itemClick={itemClickHandle}
+              />
+            )
           })
         }
       </div>

@@ -29,7 +29,7 @@ const EntirePagination = memo((props) => {
   return (
     <PaginationWrapper>
       {
-        !!roomList.length &&(
+        !!roomList?.length &&(
         <div className="info">
           <Pagination count={totalPage} onChange={pageChangeHandle} />
           <div className="desc">

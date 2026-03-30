@@ -12,12 +12,12 @@ import Indicator from '@/base-ui/indicator';
 import classNames from 'classnames';
 
 const RoomItem = memo((props) => {
-  const {itemData,itemWidth="25%"}=props
+  const {itemData,itemWidth="25%",itemClick}=props
   const [selectIndex,setSelectIndex]=useState(0)
   const sliderRef=useRef()
 
   // 点击控制按钮切换图片
-  function controlClickHandle(isRight=true){
+  function controlClickHandle(isRight=true,event){
     if(isRight) sliderRef.current?.next()
     else sliderRef.current?.prev()
 
@@ -27,54 +27,71 @@ const RoomItem = memo((props) => {
     if(newIndex<0) newIndex=length
     if(newIndex>length)newIndex=0
     setSelectIndex(newIndex)
+
+    // 这里需要阻止事件冒泡,否则点击控制按钮会触发点击房间项的事件
+    event.stopPropagation()
   }
 
+
+  // 点击房间项跳转详情页
+  function itemClickHandle(){
+    if(itemClick) itemClick(itemData)
+  }
+
+  //子元素的赋值
+  const pictureElement=(
+    <div className="cover">
+      <img src={itemData.picture_url} alt=''/>
+    </div>
+  )
+  const sliderElement=(
+    <div className="slider">
+      <div className="control">
+        <div className="btn left" onClick={e=>controlClickHandle(false,e)}>
+          <IconArrowLeft width="30" height="30" />
+        </div>
+        <div className="btn right" onClick={e=>controlClickHandle(true,e)}>
+          <IconArrowRight width="30" height="30" />
+        </div>
+      </div>
+      <div className="indicator">
+        <Indicator selectIndex={selectIndex}>  
+          {
+            itemData?.picture_urls?.map((item,index)=>{
+              return (
+                <div className='dot-item' key={index}>
+                  <span className={classNames('dot',{"active":selectIndex==index})}></span>
+                </div>
+              )
+            })
+          }
+        </Indicator>
+      </div>
+      <Carousel dots={false} ref={sliderRef}>
+        {
+          itemData?.picture_urls?.map(item=>{
+            return(
+              <div className="cover" key={item}>
+                <img src={item} alt=''/>
+              </div>
+            )
+          })
+        
+          }
+      </Carousel>
+    </div>
+  )
 
   return (
     //加$是为了在style.js里使用verifyColor，不然HTML会觉得这是自己的属性
     <ItemWrapper 
       $verifyColor={itemData?.verify_info?.text_color||'#39C5BB'}
       $itemWidth={itemWidth}
+      onClick={itemClickHandle}
     >
       <div className="inner">
-        {/* <div className="cover">
-          <img src={itemData.picture_url} alt=''/>
-        </div> */}
-        <div className="slider">
-          <div className="control">
-            <div className="btn left" onClick={e=>controlClickHandle(false)}>
-              <IconArrowLeft width="30" height="30" />
-            </div>
-            <div className="btn right" onClick={e=>controlClickHandle(true)}>
-              <IconArrowRight width="30" height="30" />
-            </div>
-          </div>
-          <div className="indicator">
-            <Indicator selectIndex={selectIndex}>  
-              {
-                itemData?.picture_urls?.map((item,index)=>{
-                  return (
-                    <div className='dot-item' key={index}>
-                      <span className={classNames('dot',{"active":selectIndex==index})}></span>
-                    </div>
-                  )
-                })
-              }
-            </Indicator>
-          </div>
-          <Carousel dots={false} ref={sliderRef}>
-            {
-              itemData?.picture_urls?.map(item=>{
-                return(
-                  <div className="cover" key={item}>
-                    <img src={item} alt=''/>
-                  </div>
-                )
-              })
-            
-              }
-          </Carousel>
-        </div>
+        {/* 有图片时渲染轮播图，否则渲染单张图片 */}
+        {itemData.picture_urls ?sliderElement : pictureElement} 
         <div className="desc">
           {itemData.verify_info.messages.join(' . ')}
         </div>
