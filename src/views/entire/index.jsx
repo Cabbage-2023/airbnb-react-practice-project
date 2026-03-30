@@ -16,7 +16,7 @@ const Entire = memo(() => {
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(fetchRoomList())
-    dispatch(changeHeaderConfig({isFixed:true}))
+    dispatch(changeHeaderConfig({isFixed:true,topAlpha:false}))
   },[dispatch])
 
 

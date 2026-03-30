@@ -12,6 +12,8 @@ export const RightWrapper=styled.div`
   .btns{
     display: flex;
     margin-right:20px;
+    color: ${props=>props.theme.isAlpha ? '#fff' : '#000'};
+
     .btn{
       margin-right: 12px;
       padding: 5px 12px;
@@ -19,14 +21,14 @@ export const RightWrapper=styled.div`
       cursor: pointer;
 
       &:hover{
-        background-color: #ddd;
+        background-color: ${props=>props.theme.isAlpha ? 'rgba(255, 255, 255, 0.2)' : '#ddd'};
       }
     }
   }
 
   .profile{
     position: relative;
-
+    background-color: #fff;
     display: flex;
     align-items: center;
     padding: 5px 12px;
@@ -46,8 +48,8 @@ export const RightWrapper=styled.div`
       top:60px;
 
       font-weight: normal;
-      .top{border-bottom: 1px solid #ddd;}
-      .top,.bottom{padding:10px 0;}
+      .top2{border-bottom: 1px solid #ddd;}
+      .top2,.bottom{padding:10px 0;}
       .item{
         height: 40px;
         line-height: 40px;

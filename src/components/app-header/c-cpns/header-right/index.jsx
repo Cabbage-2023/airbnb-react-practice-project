@@ -39,7 +39,7 @@ const HeaderRight = memo(() => {
         <IconAvatar />
 
         {showPanel&&(<div className="panel">
-          <div className="top">
+          <div className="top2">
             <div className="item register">注册</div>
             <div className="item login">登录</div>
           </div>

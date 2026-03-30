@@ -9,8 +9,11 @@ import DetailInfos from './c-cpns/detail-infos'
 const Detail = memo(() => {
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(changeHeaderConfig({isFixed:false}))
+    dispatch(changeHeaderConfig({isFixed:false,topAlpha:false}))
   },[dispatch])
+
+
+
 
   return (
     <DetailWrapper>

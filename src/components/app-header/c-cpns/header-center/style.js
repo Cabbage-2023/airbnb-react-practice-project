@@ -3,9 +3,21 @@ import styled from 'styled-components'
 
 export const CenterWrapper = styled.div`
   /* 确保在 Header 组件中水平居中 */
+  position: relative;
   display: flex;
   justify-content: center;
   flex: 1;
+  /* 关键：给搜索区域一个固定高度，防止子元素脱离文档流导致父级塌陷 */
+  height: 80px;
+
+  /* 统一搜索栏和小搜索条的基础样式，防止动画切换时位置跳动 */
+  .search-bar, .search-detail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 完美的水平垂直居中方案 */
+    z-index: 999;
+  }
 
   .search-bar {
     display: flex;
@@ -71,7 +83,56 @@ export const CenterWrapper = styled.div`
           stroke-width: 4px; 
           }
       }
+    }    
+  }
+
+  .search-detail {
+    top: 40px;
+
+    .infos {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      z-index: 20;
+      transform: translateX(-50%);
     }
+  }
+
+  .detail-exit {
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+  }
+
+  .detail-exit-active {
+    transition: all 250ms ease;
+    transform: scale(0.35, 0.727273) translateY(-58px);
+    opacity: 0;
+  }
+
+  .detail-enter {
+    transform: scale(0.35, 0.727273) translateY(-58px);
+    opacity: 0;
+  }
+
+  .detail-enter-active {
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+    transition: all 250ms ease;
+  }
+
+  .bar-enter {
+    transform: scale(2.85714, 1.375) translateY(58px);
+    opacity: 0;
+  }
+
+  .bar-enter-active {
+    transition: all 250ms ease;
+    transform: scale(1.0) translateY(0);
+    opacity: 1;
+  }
+
+  .bar-exit {
+    opacity: 0;
   }
 `
 

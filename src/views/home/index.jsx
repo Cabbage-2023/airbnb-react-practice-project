@@ -35,7 +35,7 @@ const Home = memo(() => {
   const dispatch=useDispatch()
   useEffect(()=>{
     dispatch(fetchHomeDataAction())
-    dispatch(changeHeaderConfig({isFixed:true}))
+    dispatch(changeHeaderConfig({isFixed:true,topAlpha:true}))
   },[dispatch])
 
   return (

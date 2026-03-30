@@ -5,7 +5,7 @@ export const LeftWrapper = styled.div`
   display: flex;
   align-items: center;
   /* 统一交给父级控制颜色，子元素通过 currentColor 继承 */
-  color:${props=>props.theme.color.primaryColor}; 
+  color:${props=>props.theme.isAlpha ? '#fff' : props.theme.color.primaryColor};; 
 
   .logo {
     cursor: pointer;
