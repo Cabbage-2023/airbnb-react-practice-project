@@ -1,11 +1,11 @@
 const theme={
   color:{
-    primaryColor:'#ff385c',
+    primaryColor:'#39C5BB',
     secondaryColor:'#39C5BB',
   },
   text:{
-    primaryColor:"#484848",
-    secondaryColor:'#222',
+    primaryColor:"#39C5BB",
+    secondaryColor:'#39C5BB',
   },
   mixin:{
     boxShadow:`
